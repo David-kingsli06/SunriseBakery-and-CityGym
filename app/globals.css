@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Themes: each site sets its colours and fonts here ---------- */
+
+/* Bakery theme (also the default) */
+:root,
+.theme-bakery {
+  --c-cream: 251 245 236;
+  --c-sand: 245 234 217;
+  --c-tint: 240 226 207;
+  --c-card: 255 253 249;
+  --c-caramel: 180 122 79;
+  --c-caramelDark: 143 90 52;
+  --c-cocoa: 74 52 40;
+  --c-bodytext: 111 90 75;
+  --c-line: 234 217 196;
+  --c-footer: 74 52 40;
+  --c-onDark: 251 245 236;
+  --c-onDarkMuted: 215 194 172;
+  --c-accentOnDark: 227 185 143;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --radius-card: 22px;
+  color: rgb(var(--c-bodytext));
+}
+
+/* Gym theme: black, charcoal and red */
+.theme-gym {
+  --c-cream: 10 10 10;
+  --c-sand: 20 20 20;
+  --c-tint: 31 31 31;
+  --c-card: 31 31 31;
+  --c-caramel: 255 61 31;
+  --c-caramelDark: 196 42 16;
+  --c-cocoa: 255 255 255;
+  --c-bodytext: 185 185 185;
+  --c-line: 42 42 42;
+  --c-footer: 10 10 10;
+  --c-onDark: 255 255 255;
+  --c-onDarkMuted: 185 185 185;
+  --c-accentOnDark: 255 61 31;
+  --font-serif: var(--font-oswald), Impact, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --radius-card: 2px;
+  color: rgb(var(--c-bodytext));
+}
+
+.theme-gym h1,
+.theme-gym h2,
+.theme-gym h3,
+.theme-gym h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Shared building blocks ---------- */
+@layer components {
+  .container-x {
+    @apply mx-auto w-[min(1180px,calc(100%_-_40px))];
+  }
+  .eyebrow {
+    @apply mb-3 inline-block text-[0.78rem] font-bold uppercase tracking-[0.22em] text-caramel;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-caramel px-7 py-3.5 font-bold text-white shadow-[0_10px_24px_rgba(180,122,79,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-caramelDark;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-caramel px-7 py-3.5 font-bold text-caramelDark transition duration-200 hover:-translate-y-0.5 hover:bg-caramel hover:text-white;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* Entrance animations */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.8s ease both;
+}
+
+@keyframes logoBar {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+.logo-bar {
+  animation: logoBar 1.4s ease-in-out infinite;
+}
+
+/* Scroll reveal: the Reveal component adds "visible" when an element comes into view */
+.reveal {
+  opacity: 0;
+  translate: 0 36px;
+  transition: opacity 0.9s ease, translate 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* People who asked for reduced motion get no animation */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
